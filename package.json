@@ -1,0 +1,30 @@
+{
+  "name": "bapi",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000b\u0000a\u0000p\u0000i\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junc0304/bapi.git"
+  },
+  "author": "JunC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junc0304/bapi/issues"
+  },
+  "homepage": "https://github.com/junc0304/bapi#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-promise-router": "^3.0.3",
+    "mongoose": "^5.4.13",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
