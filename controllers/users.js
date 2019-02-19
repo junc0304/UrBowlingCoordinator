@@ -3,9 +3,9 @@ const User = require('../models/user');
 module.exports = {
 
     signUp: async (req, res, next) => {
-        console.log('sign up requested');
+        console.log('sign up requested', req.body);
         
-        const { email, password } = req.body;
+        const {name, email, password } = req.body;
 
         const userExist = await User.findOne({ email });
         //if email already exists, return error
@@ -13,10 +13,10 @@ module.exports = {
         if(userExist)
             return res.status(403).json({error: 'Email is already in use'});
 
-        const newUser = new User({ email, password });
+        const newUser = new User({ name, email, password });
         await newUser.save();
 
-        console.log('account created', newUser.email);
+        console.log('account created', await User.findOne({ email }));
 
         res.status(200).json({ message: 'Signed up!'});
     },
