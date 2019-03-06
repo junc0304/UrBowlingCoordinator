@@ -7,7 +7,7 @@ const groupsUserSchema = new Schema({
     users: [{
         user_id: { type: ObjectId, required: true },
         average_score: {type: Number}, 
-        role: { type: String, enum: ['owner', 'admin' , 'user']}
+        role: { type: String, enum: ['owner', 'admin' , 'user'], required: true}
     }]
 });
 

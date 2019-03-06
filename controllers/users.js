@@ -91,6 +91,22 @@ module.exports = {
         res.status(200).json( result );
     },
 
+    
+    delete: async (req, res, next) => {
+        console.log('DELETE: user/:user_id');
+        const { user_id } = req.params;
+        const userFound = await User.findOne({ _id: user_id });
+
+        if (!userFound) {
+            return res.status(403).json({ error: 'user not found' })
+        }
+
+        const deletedUser = await User.findByIdAndDelete({_id: user_id});
+
+        res.status(200).json({Deleted: deletedUser});
+    },
+
+
     // view one user
     view_one: async (req, res, next) => {
         console.log('GET: user/:user_id');

@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+
 const Users = require('./user');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
+
 
 const groupSchema = new Schema({
     title: { type: String, required: true },
@@ -16,7 +19,7 @@ const groupSchema = new Schema({
 //update created/updated field when creating a new group
 groupSchema.pre('save', async function (next) {
     try {
-        this.created = new Date().getDate();
+        this.created = moment().format();
         this.updated = this.created;
     }
     catch (error) {
@@ -27,7 +30,7 @@ groupSchema.pre('save', async function (next) {
 //update updated field when updating an existing group
 groupSchema.pre('update', async function (next) {
     try {
-        this.updated =  new Date();
+        this.updated = moment().format();
     }
     catch (error) {
         next(error);

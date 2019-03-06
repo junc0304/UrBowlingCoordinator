@@ -30,9 +30,9 @@ userSchema.pre('save', async function (next) {
     }
 });
 
-userSchema.pre('update', async function (next) {
+userSchema.pre('updateOne', async function (next) {
     try {
-        const password = this.getUpdate().$set.password;
+        const password = this.getUpdate().$set.password;    
         if(!password) {
             return next();
         }

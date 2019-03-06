@@ -24,13 +24,13 @@ module.exports = {
         if (group) {
             return res.status(403).json({ error: 'The group already exists' });
         }
-
+        //create group
         const newGroup = new Group({
             title,
             owner: req.user.name,
             owner_id: req.user.id,
             description,
-            users: [],  //reference groups.users table
+            users: null,  //reference groups.users table
             created: null,
             updated: null
         });
@@ -38,7 +38,11 @@ module.exports = {
         //group.users table holds list of users in a group 
         const newGroupUsers = new GroupUsers({
             group_id: newGroup._id,
-            users: []
+            users: [{                    
+                user_id: req.user.id,
+                average_score: null,
+                role: 'owner'
+            }]
         });
 
         //add reference
@@ -54,7 +58,7 @@ module.exports = {
             { $push: { group: newGroup._id } 
         });
 
-        res.status(200).json( newGroup );
+        res.status(200).json( { status: '200', created: newGroup } );
     },
 
     // delete an existing group
