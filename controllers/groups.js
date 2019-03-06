@@ -49,13 +49,13 @@ module.exports = {
         newGroup.users = newGroupUsers._id; //add reference
 
         console.log('new group', newGroup);
-       // console.log('new users', newGroupUsers);
+        console.log('new users', newGroupUsers);
 
         await newGroupUsers.save();
         await newGroup.save();
-        await User.update(
+        await User.updateOne( 
             { _id: req.user.id }, 
-            { $push: { group: newGroup._id } 
+            { $push: { groups: newGroup._id } 
         });
 
         res.status(200).json( { status: '200', created: newGroup } );

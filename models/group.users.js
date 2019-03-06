@@ -15,8 +15,6 @@ const groupsUserSchema = new Schema({
 
 groupsUserSchema.pre('save', async function (next) {
     try {
-        
-        this.users = this.users.push({user_id: this.user_id})
 
     }
     catch (error) {

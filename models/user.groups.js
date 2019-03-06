@@ -6,8 +6,7 @@ const Schema = mongoose.Schema;
 const userGroupSchema = new Schema({
     user_id: { type: ObjectId, required: true },
     group: { 
-        group_id: { type: ObjectId },
-        date_joined: { type: Date } 
+        group_id: { type: ObjectId }
     },
 });
 

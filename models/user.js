@@ -6,15 +6,12 @@ const bcrypt = require('bcryptjs');
 
 //user account schema
 const userSchema = new Schema({
-
     name: { type: String, required: true },
     email: { type: String, lowercase: true, required: true },
     password: { type: String, required: true, select: false},
-    
     groups: [{ type: ObjectId }],   //reference to user.groups
     scores: { type: ObjectId },     //reference to user.scores
     contacts: [{type: ObjectId}],    //reference to user.contacts
-
     description: { type: String }
 
 });
@@ -32,11 +29,14 @@ userSchema.pre('save', async function (next) {
 
 userSchema.pre('updateOne', async function (next) {
     try {
-        const password = this.getUpdate().$set.password;    
-        if(!password) {
+        const updates = this.getUpdate();
+        if(typeof updates.$set == 'undefined') {
             return next();
         }
-        this.getUpdate().$set.password = await bcrypt.hash( password, await bcrypt.genSalt(13));
+        if(!updates.$set.password) {
+            return next();
+        }
+        this.getUpdate().$set.password = await bcrypt.hash( updates.$set.password , await bcrypt.genSalt(13));
         next();
     }
     catch (error) {
